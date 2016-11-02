@@ -1,0 +1,10 @@
+td{
+	height: 20px;
+	width:20px;
+}
+.black-tile{
+	background: black;
+}
+.grey-tile{
+	background: grey;
+}

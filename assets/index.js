@@ -31,7 +31,6 @@
 /*		render();
 	});
 }*/
-
 class Painter {
 	constructor(selector, cols, rows) {
 		if (!selector)
@@ -46,13 +45,19 @@ class Painter {
 				markup += "<td></td>";
 			markup += "</tr>";
 		}
-
 		$(function() {
 			$(selector).html(markup);
 			$(selector).on("click", "td", function() {
-				$(this).toggleClass("black-tile");
+				$(this).toggleClass("tile-active");
 			});
 		});
+
+	}
+	changeTileColor(stylesheetid,newColor){
+		if(!newColor||!stylesheetid)
+			return;
+		var css = ".tile-active{\n\tbackground:"+newColor+";\n}";
+		$(stylesheetid).html(css);
 	}
 	createChessBoard() {
 		var id = this.selector;
@@ -65,6 +70,12 @@ class Painter {
 		var bname = $(this.selector).css("border");
 		$(this.selector).css("border",bname.indexOf("none")!= -1?"2px solid":"none");
 	}
+	clear(){
+		
+		let id = this.selector;
+		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
+			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");
+	}
 }
 class ChessBoard extends Painter{
 	constructor(selector,cols,rows,active_color){
@@ -75,8 +86,6 @@ class ChessBoard extends Painter{
 		let id = this.selector;
 		$(id + " tr:nth-child(odd) td:nth-child(odd)").css("background","black");
 		$(id + " tr:nth-child(even) td:nth-child(even)").css("background",this.activeColor);
-
-
 	}
 }
-var chess = new ChessBoard("#table", 30, 30,"gold");
+var chess = new Painter("#table", 30, 30,"gold");

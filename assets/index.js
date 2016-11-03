@@ -33,28 +33,25 @@ function ChessBoard(table_id, cols, rows) {
 }
 
 class Painter {
-
-	constructor(table_id, cols, rows) {
-		if (!table_id)
+	constructor(selector, cols, rows) {
+		if (!selector)
 			throw new TypeError("Provide a valid table selector");
 		this.cols = cols || 20;
 		this.rows = rows || 20;
+		let markup = "";
+		for (let height = 0; height < this.rows; height++) {
+			markup += "<tr>";
+			for (let width = 0; width < this.cols; width++)
+				markup += "<td></td>";
+			markup += "</tr>";
+		}
+
 		$(function() {
-			console.log("doc reaady");
-			var markup = "";
-			//$(table_id).html("<tr>");
-			for (var height = 0; height < self.rows; height++) {
-				markup += "<tr>";
-				for (var width = 0; width < self.cols; width++)
-					markup += "<td></td>";
-				markup += "</tr>"
-			}
-			$("#table").append(markup);
-			$("#table").on("click", "td", function() {
+			$(selector).html(markup);
+			$(selector).on("click", "td", function(){
 				$(this).toggleClass("black-tile");
 			});
 		});
 	}
-
 }
 var chess = new Painter("#table", 30, 30);

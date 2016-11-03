@@ -1,4 +1,4 @@
-function ChessBoard(table_id, cols, rows) {
+/*function ChessBoard(table_id, cols, rows) {
 	var self = this;
 	self.cols = cols || 20;
 	self.rows = rows || 20;
@@ -28,9 +28,9 @@ function ChessBoard(table_id, cols, rows) {
 		/*
 		 * Render on when dom is ready
 		 */
-		render();
+/*		render();
 	});
-}
+}*/
 
 class Painter {
 	constructor(selector, cols, rows) {
@@ -62,12 +62,21 @@ class Painter {
 		});
 	}
 	toggleBorder(){
-		if($(this.selector).css("border").indexOf("none") == -1){
-			$(this.selector).css("border","none");
-		}
-		else{
-			$(this.selector).css("border","2px solid");
-		}
+		var bname = $(this.selector).css("border");
+		$(this.selector).css("border",bname.indexOf("none")!= -1?"2px solid":"none");
 	}
 }
-var chess = new Painter("#table", 30, 30);
+class ChessBoard extends Painter{
+	constructor(selector,cols,rows,active_color){
+		super(selector,cols,rows);
+		this.activeColor = active_color || "dodgerblue";
+	}
+	createBoard(){
+		let id = this.selector;
+		$(id + " tr:nth-child(odd) td:nth-child(odd)").css("background","black");
+		$(id + " tr:nth-child(even) td:nth-child(even)").css("background",this.activeColor);
+
+
+	}
+}
+var chess = new ChessBoard("#table", 30, 30,"gold");

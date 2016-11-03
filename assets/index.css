@@ -1,10 +1,14 @@
 td{
-	height: 20px;
-	width:20px;
+	height: 15px;
+	width:15px;
 }
 .black-tile{
 	background: black;
 }
 .grey-tile{
 	background: grey;
+}
+#table{
+	border:2px solid;
+	margin: auto;
 }

@@ -1,0 +1,60 @@
+commit fd5e42f4aa573d6b23ce4cd8fd6cb58046f3a439
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 21:39:52 2016 +0200
+
+    function added toggleBorder method
+
+commit 3cd1d4a7d22bc475e3895c939dd2337699016481
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 21:29:56 2016 +0200
+
+    Painter class is working
+
+commit 6901e3fc1722ad26756cb66479185e71ea2ccac6
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 20:44:48 2016 +0200
+
+    working on ES6 class
+
+commit 921de69b1e684f6b8bd70ca019ab890186cd7d9d
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 20:31:09 2016 +0200
+
+    replaced with arrow functions
+
+commit ef114305375985161701d85eea56ebdd97dd6e23
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 11:34:53 2016 +0200
+
+    renamed init to render.
+    render is executed only when dom is ready so no need for doc ready
+
+commit fec4c3a23001e494857f7532eaffbd91f8d976a8
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Thu Nov 3 08:05:02 2016 +0200
+
+    added clear function
+
+commit 047d376fd63d9cf1ae62e5d309ba677db862d22d
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Wed Nov 2 21:19:42 2016 +0200
+
+    created irst working demo
+
+commit 5e39666a34d6e99790bca4d87fe54dee849d03b8
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Wed Nov 2 20:54:33 2016 +0200
+
+    added index.css
+
+commit 58a6812277916354595109182d43bb49800804ed
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Wed Nov 2 20:48:18 2016 +0200
+
+    created index.js
+
+commit d269dda0fa9f3381cbaf15b9303408ba3f7e4577
+Author: kounelios13 <pkounelios@gmail.com>
+Date:   Wed Nov 2 20:36:43 2016 +0200
+
+    created index page

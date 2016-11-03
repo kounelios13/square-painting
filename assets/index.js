@@ -71,10 +71,10 @@ class Painter {
 		$(this.selector).css("border",bname.indexOf("none")!= -1?"2px solid":"none");
 	}
 	clear(){
-		
-		let id = this.selector;
+		$(this.selector+" .tile-active").removeClass("tile-active");
+		/*let id = this.selector;
 		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
-			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");
+			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");*/
 	}
 }
 class ChessBoard extends Painter{

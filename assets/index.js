@@ -2,7 +2,7 @@ function ChessBoard(table_id, cols, rows) {
 	var self = this;
 	self.cols = cols || 20;
 	self.rows = rows || 20;
-	var render = function() {
+	var render = ()=> {
 		var markup = "";
 		//$(table_id).html("<tr>");
 		for (var height = 0; height < self.rows; height++) {
@@ -14,17 +14,20 @@ function ChessBoard(table_id, cols, rows) {
 		$(table_id).html(markup);
 		$("#table").on("click", "td", function() {
 			$(this).toggleClass("black-tile");
-		});
+		});	
 		return markup;
 	};
-	self.createChess = function() {
+	self.createChess = ()=> {
 		$(table_id + " tr:nth-child(even) td:nth-child(even)").addClass("black-tile");
 		$(table_id + " tr:nth-child(odd) td:nth-child(odd)").addClass("grey-tile");
 	};
-	self.clear = function() {
+	self.clear =() =>{
 		$(".black-tile").removeClass("black-tile");
 	};
 	$(function(){
+		/*
+		* Render on when dom is ready
+		*/
 		render();
 	});
 }

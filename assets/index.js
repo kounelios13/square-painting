@@ -38,6 +38,7 @@ class Painter {
 			throw new TypeError("Provide a valid table selector");
 		this.cols = cols || 20;
 		this.rows = rows || 20;
+		this.selector = selector;
 		let markup = "";
 		for (let height = 0; height < this.rows; height++) {
 			markup += "<tr>";
@@ -48,10 +49,25 @@ class Painter {
 
 		$(function() {
 			$(selector).html(markup);
-			$(selector).on("click", "td", function(){
+			$(selector).on("click", "td", function() {
 				$(this).toggleClass("black-tile");
 			});
 		});
+	}
+	createChessBoard() {
+		var id = this.selector;
+		$(function() {
+			$(id + " tr:nth-child(even) td:nth-child(even)").addClass("black-tile");
+			$(id + " tr:nth-child(odd) td:nth-child(odd)").addClass("grey-tile");
+		});
+	}
+	toggleBorder(){
+		if($(this.selector).css("border").indexOf("none") == -1){
+			$(this.selector).css("border","none");
+		}
+		else{
+			$(this.selector).css("border","2px solid");
+		}
 	}
 }
 var chess = new Painter("#table", 30, 30);

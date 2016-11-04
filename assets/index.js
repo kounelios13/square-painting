@@ -73,7 +73,7 @@ class Painter {
 			console.log("Suppressed error");
 		}
 	}
-	
+
 	createChessBoard() {
 		var id = this.selector;
 		$(function() {
@@ -85,23 +85,29 @@ class Painter {
 		var bname = $(this.selector).css("border");
 		$(this.selector).css("border",bname.indexOf("none")!= -1?"2px solid":"none");
 	}
-	clear(){
+	clearBoard(){
 		$(this.selector+" .tile-active").removeClass("tile-active");
 		/*let id = this.selector;
 		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
 			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");*/
 	}
 	loop(time){
+		this.clearBoard();
+		let mat = $(this.selector+" td");
+		let max = mat.length;
+		$(this.selector+" td").removeClass("tile-active");
+		let painter = this;
 		this.looper = setInterval(function(){
-			let mat = $(this.selector+" td");
-			for(let i = 0;i<mat.length;i++){
-				let n = Math.floor(Math.random(100) * 2);
-				if( n > 2){
-					console.log("hit active");
-					$(this.selector+" td:nth-child("+i+")").addClass("tile-active");
-				}
+			painter.clearBoard();
+			for(let i = 0;i<max;i++){
+				let num = Math.floor(Math.random(2) * 2);
+				if(num && num <= 1)
+					$(mat[i]).addClass("tile-active");
 			}
-		},1000);
+		},time||1000);
+	}
+	exit_loop(){
+		clearInterval(this.looper);
 	}
 }
 class ChessBoard extends Painter{

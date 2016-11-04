@@ -49,7 +49,7 @@ class Painter {
 		for (let height = 0; height < this.rows; height++) {
 			markup += "<tr>";
 			for (let width = 0; width < this.cols; width++)
-				markup += "<td></td>";
+				markup += "<td data-col="+width+" data-row="+height+"></td>";
 			markup += "</tr>";
 		}
 		$(function() {
@@ -95,7 +95,7 @@ class Painter {
 			let mat = $(this.selector+" td");
 			for(let i = 0;i<mat.length;i++){
 				let n = Math.floor(Math.random(100) * 2);
-				if( n > 1){
+				if( n > 2){
 					console.log("hit active");
 					$(this.selector+" td:nth-child("+i+")").addClass("tile-active");
 				}
@@ -132,4 +132,4 @@ class ChessBoard extends Painter{
 	}
 }
 
-let chess = new ChessBoard("#table",30,30,"#fly");
+let chess = new Painter("#table",30,30,"#fly");

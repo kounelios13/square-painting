@@ -91,19 +91,21 @@ class Painter {
 		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
 			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");*/
 	}
-	loop(time){
-		this.clearBoard();
+	createRandowDraw(){
+		var t = this;
+		t.clearBoard();
 		let mat = $(this.selector+" td");
 		let max = mat.length;
-		$(this.selector+" td").removeClass("tile-active");
-		let painter = this;
+		for(let i = 0;i<max; i++){
+			let num = Math.floor(Math.random(2) * 2);
+			if(num && num <=1)
+				$(mat[i]).addClass("tile-active");
+		}
+	}
+	loop(time){
+		
 		this.looper = setInterval(function(){
-			painter.clearBoard();
-			for(let i = 0;i<max;i++){
-				let num = Math.floor(Math.random(2) * 2);
-				if(num && num <= 1)
-					$(mat[i]).addClass("tile-active");
-			}
+			this.createRandowDraw();
 		},time||1000);
 	}
 	exit_loop(){

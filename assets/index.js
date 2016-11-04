@@ -73,6 +73,7 @@ class Painter {
 			console.log("Suppressed error");
 		}
 	}
+	
 	createChessBoard() {
 		var id = this.selector;
 		$(function() {

@@ -37,13 +37,14 @@ function changeCss(stylesheet,text){
 	$(stylesheet).html(text);
 }
 class Painter {
-	constructor(selector, cols, rows) {
+	constructor(selector, cols, rows,style) {
 		this.looper = null;
 		if (!selector)
 			throw new TypeError("Provide a valid table selector");
 		this.cols = cols || 20;
 		this.rows = rows || 20;
 		this.selector = selector;
+		this.style = style;
 		let markup = "";
 		for (let height = 0; height < this.rows; height++) {
 			markup += "<tr>";
@@ -58,11 +59,16 @@ class Painter {
 			});
 		});
 	}
-	changeTileColor(stylesheetid,newColor){
-		if(!newColor||!stylesheetid)
+	changeTileColor(stylesheet,newColor){
+		if(!newColor)
 			return;
 		var css = ".tile-active{\n\tbackground:"+newColor+";\n}";
-		changeCss(stylesheet, css);
+		try{
+			changeCss(stylesheet||this.style, css);	
+		}
+		catch(e){
+			console.log("Suppressed error");
+		}
 	}
 	createChessBoard() {
 		var id = this.selector;
@@ -91,10 +97,15 @@ class Painter {
 	}
 }
 class ChessBoard extends Painter{
-	constructor(selector,cols,rows,active_color){
-		super(selector,cols,rows);
+	constructor(selector,cols,rows,active_color,style){
+		super(selector,cols,rows,style);
 		this.activeColor = active_color || "dodgerblue";
-		changeCss("#fly",".custom-tile{\n\tbackground:"+this.activeColor+";}");
+		try{
+			changeCss(style,".custom-tile{\n\tbackground:"+this.activeColor+";}");
+		}
+		catch(e){
+			console.log("Suppressed error");
+		}
 	}
 	createBoard(){
 		let id = this.selector;

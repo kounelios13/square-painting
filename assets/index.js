@@ -59,12 +59,15 @@ class Painter {
 			});
 		});
 	}
+	setStyleSheet(stylesheet){
+		this.style = stylesheet;
+	}
 	changeTileColor(stylesheet,newColor){
 		if(!newColor)
 			return;
 		var css = ".tile-active{\n\tbackground:"+newColor+";\n}";
 		try{
-			changeCss(stylesheet||this.style, css);	
+			changeCss((stylesheet||this.style), css);	
 		}
 		catch(e){
 			console.log("Suppressed error");
@@ -87,24 +90,28 @@ class Painter {
 		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
 			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");*/
 	}
-	loop(){
+	loop(time){
 		this.looper = setInterval(function(){
-			for(var i = 0,max=this.cols*this.rows;i<max;i++){
-				if(Math.floor(Math.random() * 10) > 1)
-					$(" tr td nth-child("+i+")").toggleClass("tile-active");
+			let mat = $(this.selector+" td");
+			for(let i = 0;i<mat.length;i++){
+				let n = Math.floor(Math.random(100) * 2);
+				if( n > 1){
+					console.log("hit active");
+					$(this.selector+" td:nth-child("+i+")").addClass("tile-active");
+				}
 			}
 		},1000);
 	}
 }
 class ChessBoard extends Painter{
-	constructor(selector,cols,rows,active_color,style){
+	constructor(selector,cols,rows,style,active_color){
 		super(selector,cols,rows,style);
 		this.activeColor = active_color || "dodgerblue";
 		try{
 			changeCss(style,".custom-tile{\n\tbackground:"+this.activeColor+";}");
 		}
 		catch(e){
-			console.log("Suppressed error");
+			console.log(e);
 		}
 	}
 	createBoard(){
@@ -119,4 +126,10 @@ class ChessBoard extends Painter{
 		$(id+" .black-tile").removeClass("black-tile");
 		$(id+" .custom-tile").removeClass("custom-tile");
 	}
+	updateColor(color){
+		this.activeColor = color;
+		changeCss(this.style,".custom-tile{\n\tbackground:"+this.activeColor+";}");
+	}
 }
+
+let chess = new ChessBoard("#table",30,30,"#fly");

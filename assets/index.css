@@ -15,3 +15,6 @@ td{
 .tile-active{
 	background:black;
 }
+.btn-group{
+	margin:auto;
+}

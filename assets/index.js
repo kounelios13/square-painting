@@ -31,8 +31,14 @@
 /*		render();
 	});
 }*/
+function changeCss(stylesheet,text){
+	if(!text || !stylesheet)
+		throw new TypeError("Invalid color or stylesheet");
+	$(stylesheet).html(text);
+}
 class Painter {
 	constructor(selector, cols, rows) {
+		this.looper = null;
 		if (!selector)
 			throw new TypeError("Provide a valid table selector");
 		this.cols = cols || 20;
@@ -51,13 +57,12 @@ class Painter {
 				$(this).toggleClass("tile-active");
 			});
 		});
-
 	}
 	changeTileColor(stylesheetid,newColor){
 		if(!newColor||!stylesheetid)
 			return;
 		var css = ".tile-active{\n\tbackground:"+newColor+";\n}";
-		$(stylesheetid).html(css);
+		changeCss(stylesheet, css);
 	}
 	createChessBoard() {
 		var id = this.selector;
@@ -76,16 +81,31 @@ class Painter {
 		$(id + " tr:nth-child(even) td:nth-child(even)").removeClass("black-tile");
 			$(id + " tr:nth-child(odd) td:nth-child(odd)").removeClass("grey-tile");*/
 	}
+	loop(){
+		this.looper = setInterval(function(){
+			for(var i = 0,max=this.cols*this.rows;i<max;i++){
+				if(Math.floor(Math.random() * 10) > 1)
+					$(" tr td nth-child("+i+")").toggleClass("tile-active");
+			}
+		},1000);
+	}
 }
 class ChessBoard extends Painter{
 	constructor(selector,cols,rows,active_color){
 		super(selector,cols,rows);
 		this.activeColor = active_color || "dodgerblue";
+		changeCss("#fly",".custom-tile{\n\tbackground:"+this.activeColor+";}");
 	}
 	createBoard(){
 		let id = this.selector;
-		$(id + " tr:nth-child(odd) td:nth-child(odd)").css("background","black");
-		$(id + " tr:nth-child(even) td:nth-child(even)").css("background",this.activeColor);
+		/*$(id + " tr:nth-child(odd) td:nth-child(odd)").css("background","black");
+		$(id + " tr:nth-child(even) td:nth-child(even)").css("background",this.activeColor);*/
+		$(id+" tr:nth-child(odd) td:nth-child(odd)").addClass("black-tile");
+		$(id+" tr:nth-child(even) td:nth-child(even)").addClass("custom-tile");
+	}
+	clearBoard(){
+		let id = this.selector;
+		$(id+" .black-tile").removeClass("black-tile");
+		$(id+" .custom-tile").removeClass("custom-tile");
 	}
 }
-var chess = new Painter("#table", 30, 30,"gold");

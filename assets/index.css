@@ -1,6 +1,7 @@
 td{
 	height: 15px;
 	width:15px;
+	border-radius:30%;
 }
 .black-tile{
 	background: black;

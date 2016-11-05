@@ -103,9 +103,9 @@ class Painter {
 		}
 	}
 	loop(time){
-		
+		let t = this;
 		this.looper = setInterval(function(){
-			this.createRandowDraw();
+			t.createRandowDraw();
 		},time||1000);
 	}
 	exit_loop(){

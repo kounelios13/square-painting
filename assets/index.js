@@ -1,3 +1,5 @@
+/*if(typeof modules)
+	modules.exports = Painter;*/
 function changeCss(stylesheet, text) {
 	if (!text || !stylesheet)
 		throw new TypeError("Invalid color or stylesheet");
@@ -20,8 +22,8 @@ class Painter {
 				markup += "<td data-col=" + width + " data-row=" + height + "></td>";
 			markup += "</tr>";
 		}
-		this.jSelector.html(markup);
-		this.jSelector.on("click", "td", function() {
+		this.jSelector.html(markup)
+		.on("click", "td", function() {
 			$(this).toggleClass("tile-active");
 		});
 		return this;
@@ -53,6 +55,12 @@ class Painter {
 	}
 	clearBoard() {
 		$(this.selector + " .tile-active").removeClass("tile-active");
+	}
+	getPaintedCells(){
+		return $(this.selector+" .tile-active");
+	}
+	getPaintedCellsNumber(){
+		return this.getPaintedCells().length;
 	}
 	createRandowDraw() {
 		var t = this;
@@ -104,7 +112,7 @@ class ChessBoard extends Painter {
 	}
 }
 
-let chess; /*= new Painter("#table",30,30,"#fly");*/
+let chess = null; /*= new Painter("#table",30,30,"#fly");*/
 $(document).ready(function() {
 	chess = new Painter("#table", 30, 30, "#fly", "ligtblue");
-});
+});/**/
